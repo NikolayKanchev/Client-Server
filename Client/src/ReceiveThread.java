@@ -7,7 +7,6 @@ import java.util.TimerTask;
 
 public class ReceiveThread extends Thread
 {
-
     private Socket socket;
 
     public ReceiveThread(Socket socket)
@@ -27,7 +26,7 @@ public class ReceiveThread extends Thread
 
                 String str = scanner.nextLine();
 
-                if(!validServerReply(str))
+                if(!validServerReply(str) && Main.isReceived_J_OK())
                 {
                     System.out.println("Not valid reply from the server !!!");
                 }
@@ -42,7 +41,7 @@ public class ReceiveThread extends Thread
     {
 
 //    region    It checks the DATA message
-        if (str.startsWith("DATA"))
+        if (str.startsWith("DATA") && Main.isReceived_J_OK())
         {
             str = str.substring(5);
 
@@ -86,6 +85,8 @@ public class ReceiveThread extends Thread
         {
             Main.setConnectionAccepted(true);
 
+            Main.setReceived_J_OK(true);
+
             System.out.println("** Welcome to Nikolay's CHAT **\n");
 
             Timer timer = new Timer();
@@ -104,7 +105,7 @@ public class ReceiveThread extends Thread
 //        endregion
 
 //        region It checks the J_ER message
-        if (str.startsWith("J_ER"))
+        if (str.startsWith("J_ER") && Main.isReceived_J_OK())
         {
             if (!str.contains(": "))
             {
@@ -149,7 +150,7 @@ public class ReceiveThread extends Thread
 //        endregion
 
 //      region  It checks the LIST message
-        if (str.startsWith("LIST"))
+        if (str.startsWith("LIST") && Main.isReceived_J_OK())
         {
             str = str.substring(5);
 

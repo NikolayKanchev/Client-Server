@@ -101,6 +101,11 @@ public class Users
             if(s.equals(address))
             {
                 socket = activeClients.get(s);
+
+                if (message.contains("J_OK"))
+                {
+                    System.out.println("Server sends - <<<" + message + ">>> to the client " + socket.getInetAddress().getHostAddress());
+                }
             }
 
             users++;

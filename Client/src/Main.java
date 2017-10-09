@@ -10,6 +10,7 @@ public class Main
     private static String userName;
     private static String hostAddress = "127.0.0.1";
     private static boolean connectionAccepted = false;
+    private static boolean received_J_OK = false;
 
     public static void main(String[] args)
     {
@@ -45,6 +46,7 @@ public class Main
 
     public static void getConnection()
     {
+
         Scanner in = new Scanner(System.in);
 
         while (!connectionAccepted)
@@ -72,6 +74,7 @@ public class Main
                 e.printStackTrace();
             }
 
+
             try
             {
                 Thread.sleep(500);
@@ -79,6 +82,16 @@ public class Main
             } catch (InterruptedException e)
             {
                 e.printStackTrace();
+            }
+
+            if(!received_J_OK)
+            {
+                System.out.println("Waiting for connection ............");
+            }
+
+            while (!received_J_OK)
+            {
+
             }
         }
 
@@ -112,5 +125,15 @@ public class Main
     public static void setConnectionAccepted(boolean connectionAccepted)
     {
         Main.connectionAccepted = connectionAccepted;
+    }
+
+    public static void setReceived_J_OK(boolean received_J_OK)
+    {
+        Main.received_J_OK = received_J_OK;
+    }
+
+    public static boolean isReceived_J_OK()
+    {
+        return received_J_OK;
     }
 }
