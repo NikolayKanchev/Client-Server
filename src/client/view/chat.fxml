@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="900.0" stylesheets="@VeryPretty.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ChatController">
+   <children>
+      <AnchorPane layoutY="-6.0" prefHeight="711.0" prefWidth="900.0" stylesheets="@VeryPretty.css">
+         <children>
+            <Label fx:id="welcomeLabel" layoutX="317.0" prefHeight="76.0" prefWidth="269.0" text="My Chat" />
+            <TextArea fx:id="chatRoomArea" disable="true" editable="false" layoutX="261.0" layoutY="188.0" prefHeight="417.0" prefWidth="608.0" />
+            <TextArea fx:id="messageArea" disable="true" layoutX="261.0" layoutY="631.0" onMouseEntered="#setVisibleRedLabel" prefHeight="49.0" prefWidth="509.0" />
+            <Button fx:id="sendButton" disable="true" layoutX="777.0" layoutY="641.0" mnemonicParsing="false" onAction="#sendMessage" prefHeight="31.0" prefWidth="92.0" text="SEND" />
+            <Label layoutX="261.0" layoutY="611.0" text="Write what's on your mind:" />
+            <Label fx:id="redLabel" contentDisplay="CENTER" layoutX="358.0" layoutY="149.0" prefHeight="27.0" prefWidth="487.0" text="You have to fill out all the fields !!!" textAlignment="CENTER" visible="false" />
+            <Label fx:id="portLabel" layoutX="41.0" layoutY="123.0" text="Port:" />
+            <Label fx:id="ipLabel" layoutX="41.0" layoutY="83.0" text="IP address:" />
+            <TextField fx:id="ipField" layoutX="142.0" layoutY="77.0" onMouseEntered="#setVisibleRedLabel" prefHeight="31.0" prefWidth="174.0" />
+            <TextField fx:id="portField" layoutX="94.0" layoutY="118.0" onMouseEntered="#setVisibleRedLabel" prefHeight="31.0" prefWidth="129.0" />
+            <Button fx:id="connectButton" layoutX="235.0" layoutY="118.0" mnemonicParsing="false" onAction="#connect" prefHeight="31.0" prefWidth="80.0" text="Connect" />
+            <Label fx:id="userNameLabel" layoutX="376.0" layoutY="108.0" text="Choose User Name:" visible="false" />
+            <TextField fx:id="userNameField" layoutX="530.0" layoutY="102.0" onMouseEntered="#setVisibleRedLabel" prefHeight="31.0" prefWidth="228.0" visible="false" />
+            <Button fx:id="startChatButton" layoutX="769.0" layoutY="102.0" mnemonicParsing="false" onAction="#startChat" prefHeight="22.0" prefWidth="92.0" text="Start Chat" visible="false" />
+            <Label fx:id="greenLabel" contentDisplay="CENTER" layoutX="376.0" layoutY="69.0" prefHeight="27.0" prefWidth="421.0" text="You are connected to the server !!!" textAlignment="CENTER" visible="false" />
+            <Button fx:id="stopChatButton" layoutX="769.0" layoutY="102.0" mnemonicParsing="false" onAction="#stopChat" prefHeight="22.0" prefWidth="92.0" text="Stop Chat" visible="false" />
+            <CheckBox fx:id="invisibleCheckBox" disable="true" layoutX="69.0" layoutY="659.0" mnemonicParsing="false" onAction="#setInvisible" text="make me invisible" />
+            <Label fx:id="onlineUsersLabel" disable="true" layoutX="92.0" layoutY="166.0" prefHeight="20.0" prefWidth="100.0" text="Online users" />
+            <TextArea fx:id="usersArea" disable="true" editable="false" layoutX="33.0" layoutY="188.0" prefHeight="461.0" prefWidth="219.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
