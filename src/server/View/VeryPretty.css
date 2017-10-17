@@ -1,0 +1,107 @@
+.root
+{
+    -fx-background-image: url("background.jpg");
+}
+
+.label
+{
+    -fx-font-size: 13px;
+    -fx-font-family: "Arial Black";
+    -fx-text-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.button
+{
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover
+{
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+#welcomeLabel
+{
+    -fx-font-size: 52px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+#redLabel
+{
+    -fx-font-size: 18px;
+    -fx-text-fill: red;
+}
+#redLabel2
+{
+    -fx-font-size: 14px;
+    -fx-text-fill: red;
+}
+
+#exitOptions
+{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 1em; /* 12 */
+    -fx-text-fill: transparent;
+
+    /*-fx-background-image: url("Image/NewExitLogo.png");*/
+}
+
+#chooseOption
+{
+    -fx-font-size: 20px;
+}
+
+#greenLabel
+{
+    -fx-font-size: 18px;
+    -fx-text-fill: green;
+}
+
+#blueLabel
+{
+    -fx-font-size: 18px;
+    -fx-text-fill: lightskyblue;
+}
+
+#emailLabel
+{
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+#passLabel
+{
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+#mediumLabel {
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.text-area
+{
+    -fx-font-style: italic;
+    -fx-background-color: white, white;
+    -fx-background-insets: 10, 10;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}
+
+

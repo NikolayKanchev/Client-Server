@@ -109,7 +109,22 @@ public class ChatController
 
         } catch (IOException e)
         {
-            e.printStackTrace();
+            chatRoomArea.setDisable(true);
+
+            messageArea.setDisable(true);
+
+            sendButton.setDisable(true);
+
+            invisibleCheckBox.setDisable(true);
+
+            usersArea.setDisable(true);
+
+            redLabel.setText("The connection to the server failed !!!");
+
+            redLabel.setVisible(true);
+
+            greenLabel.setVisible(false);
+
         }
     }
 

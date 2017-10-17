@@ -18,11 +18,13 @@ public class Session implements Runnable
     private boolean connClosed;
     private boolean visible = true;
     private boolean connApproved;
+    private ServerController serverController;
 
 
-    public Session(Socket socket)
+    public Session(Socket socket, ServerController  serverController)
     {
         this.socket = socket;
+        this.serverController = serverController;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class Session implements Runnable
 
                 String str = inputStream.nextLine();
 
-                System.out.println("Server received -  <<<" + str + ">>> from : " + socket.getPort() + "at " + LocalTime.now());
+                serverController.updateTextAria("Server received -  <<<" + str + ">>> from : " + socket.getInetAddress().getHostName() + ": " + socket.getPort() + " at " + LocalTime.now());
 
                 if (str.startsWith("JOIN"))
                 {
@@ -48,8 +50,12 @@ public class Session implements Runnable
                     {
                         sendToClient(Protocol.J_OK());
 
-                        Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+                        int numberOfUsers = Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
 
+                        if(numberOfUsers != 0)
+                        {
+                            serverController.updateTextAria("Server sends : <<<" + Protocol.LIST(Users.getUserNames()) + ">>> to all users !!!");
+                        }
                         connApproved = true;
 
                         checkLastAliveTime();
@@ -58,7 +64,7 @@ public class Session implements Runnable
                     {
                         sendToClient(validation);
 
-                        System.out.println("The server sends : " + validation);
+                        serverController.updateTextAria("The server sends : " + validation);
 
                         connApproved = false;
 
@@ -71,7 +77,7 @@ public class Session implements Runnable
 
                     sendToClient(s);
 
-                    System.out.println("The server sends : " + s);
+                    serverController.updateTextAria("The server sends : " + s);
 
                     return;
                 }
@@ -84,24 +90,39 @@ public class Session implements Runnable
                     {
                         sendToClient(validate);
 
-                        System.out.println("The server sends : " + validate);
+                        serverController.updateTextAria("The server sends : " + validate);
                     }
 
                     if (str.contains("make me visible"))
                     {
                         visible = true;
 
-                        Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+                        int numberOfUsers = Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+
+                        if(numberOfUsers != 0)
+                        {
+                            serverController.updateTextAria("Server sends : <<<" + Protocol.LIST(Users.getUserNames()) + ">>> to all users !!!");
+                        }
 
                     }else if (str.contains("make me invisible"))
                     {
                         visible = false;
 
-                        Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+                        int numberOfUsers = Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+
+                        if(numberOfUsers != 0)
+                        {
+                            serverController.updateTextAria("Server sends : <<<" + Protocol.LIST(Users.getUserNames()) + ">>> to all users !!!");
+                        }
 
                     }else if(validate.equals(""))
                     {
-                        Users.sendMessageToAll(str);
+                        int numberOfUsers = Users.sendMessageToAll(str);
+
+                        if(numberOfUsers != 0)
+                        {
+                            serverController.updateTextAria("Server sends : <<<" + str + ">>> to all users !!!");
+                        }
                     }
                 }
 
@@ -114,7 +135,12 @@ public class Session implements Runnable
                 {
                     Users.deleteActiveUser(socket);
 
-                    Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+                    int numberOfUsers = Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+
+                    if(numberOfUsers != 0)
+                    {
+                        serverController.updateTextAria("Server sends : <<<" + Protocol.LIST(Users.getUserNames()) + ">>> to all users !!!");
+                    }
 
                     connClosed = true;
                 }
@@ -147,11 +173,16 @@ public class Session implements Runnable
 
                        return;
                    }
-                   System.out.println("\n" + socket.getInetAddress().getHostAddress() + ": " + socket.getPort() + " didn't send IMAV - last minute !!!");
+                   serverController.updateTextAria("" + socket.getInetAddress().getHostAddress() + ": " + socket.getPort() + " didn't send IMAV last minute !!!");
 
                    Users.deleteActiveUser(socket);
 
-                   Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+                   int numberOfUsers = Users.sendMessageToAll(Protocol.LIST(Users.getUserNames()));
+
+                   if(numberOfUsers != 0)
+                   {
+                       serverController.updateTextAria("Server sends : <<<" + Protocol.LIST(Users.getUserNames()) + ">>> to all users !!!");
+                   }
 
                    try
                    {
@@ -335,7 +366,7 @@ public class Session implements Runnable
     {
         if (message.contains("J_OK"))
         {
-            System.out.println("Server sends - <<<" + message + ">>> to the client " + socket.getInetAddress().getHostAddress());
+            serverController.updateTextAria("Server sends - <<<" + message + ">>> to client " + socket.getInetAddress().getHostAddress());
         }
 
         try
@@ -348,7 +379,7 @@ public class Session implements Runnable
 
         } catch (IOException e)
         {
-            System.out.println(("The connection to " + socket.getInetAddress().getHostAddress() + " failed"));
+            serverController.updateTextAria("The connection to " + socket.getInetAddress().getHostAddress() + " failed");
         }
     }
 

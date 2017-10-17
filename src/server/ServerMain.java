@@ -1,40 +1,37 @@
 package server;
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-public class ServerMain
+public class ServerMain extends Application
 {
+    public void start(Stage primaryStage) throws Exception
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("view/server.fxml"));
+        primaryStage.setTitle("MY CHAT");
+
+        primaryStage.setScene(new Scene(root, 750, 600));
+        primaryStage.setMinWidth(750);
+        primaryStage.setMinHeight(600);
+        primaryStage.show();
+
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+    }
 
     public static void main(String[] args)
     {
-        ServerSocket serverSocket;
-
-        try
-        {
-            serverSocket = new ServerSocket(5555);
-
-            System.out.println("The server is running........");
-
-
-            while (true)
-            {
-                Socket socket = serverSocket.accept();
-
-                Session session = new Session(socket);
-
-                Thread thread = new Thread(session);
-
-                thread.start();
-
-                System.out.println("Waiting for clients..........");
-            }
-
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+       launch(args);
     }
 }

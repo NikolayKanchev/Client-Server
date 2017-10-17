@@ -11,7 +11,7 @@ public class Users
 {
     private static ArrayList<Session> users = new ArrayList<>();
 
-    public static void sendMessageToAll(String message)
+    public static int sendMessageToAll(String message)
     {
         int numberOfUsers = 0;
 
@@ -46,10 +46,7 @@ public class Users
             }
         }
 
-        if(numberOfUsers != 0)
-        {
-            System.out.println("The message : <<<" + message + ">>> was send to all users !!!");
-        }
+        return numberOfUsers;
     }
 
     public static void deleteActiveUser(Socket socket)
@@ -121,5 +118,27 @@ public class Users
                 s.setLastAliveTime(LocalTime.now());
             }
         }
+    }
+
+    public static void stopAllSockets()
+    {
+        for(Session session : users)
+        {
+            Socket socket = session.getSocket();
+
+            try
+            {
+                socket.close();
+
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void deleteAllUsers()
+    {
+        users = new ArrayList<>();
     }
 }
